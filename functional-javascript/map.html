@@ -1,0 +1,29 @@
+<html>
+<body>
+<script>
+  (function () {
+    var forEach = function (list, action) {
+      for (var i = 0; i < list.length; i++) {
+        action(list[i]);
+      }
+    };
+
+    var map = function (mappingFunction, list) {
+      var result = [];
+      forEach(list, function (item) {
+        result.push(mappingFunction(item));
+      });
+      return result;
+    };
+
+    var doubleIt = function (item) {
+      if (typeof item === "number") {
+        return item * 2;
+      }
+    };
+
+    console.log(map(doubleIt, [1, 2, 3, 4, "WTF"]));
+  })();
+</script>
+</body>
+</html>

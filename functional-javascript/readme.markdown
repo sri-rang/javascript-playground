@@ -18,8 +18,8 @@ Two examples of **forEach**'s usage:
 reduce.html
 ---
 
-An implementation of higher order function **fold/reduce** *http://en.wikipedia.org/wiki/Fold_(higher-order_function)* in
-JavaScript to count the number of negative numbers in a list:
+An implementation of the Fold / Reduce function *http://en.wikipedia.org/wiki/Fold_(higher-order_function)* as a higher order
+function **reduce** in JavaScript to count the number of occurrences of negative numbers in a list:
 
 * **forEach** created in **higher-order-functions.html** is reused as-is
 * **countNegativeNumbers** is implemented to increment **negativeNumbersTillNow** if **currentNumber** is a negative number
@@ -27,3 +27,14 @@ JavaScript to count the number of negative numbers in a list:
     * **combine** is the actual combination function, in this case **countNegativeNumbers**
     * **base** is the initial value of the count
     * **list** is any list / array on which the reduction is to be performed
+
+map.html
+---
+
+An implementation of the Map function as a higher order function **map** to double each number in a list:
+
+* **forEach** created in **higher-order-functions.html** is reused as-is
+* **doubleIt** doubles its parameter the parameter is a number
+* **map** is implemented and it takes in two parameters:
+    * **mappingFunction** is the function to apply on each item of the list
+    * **list** is any list / array that is to be mapped
