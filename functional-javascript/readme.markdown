@@ -18,7 +18,7 @@ Two examples of **forEach**'s usage:
 reduce.html
 ---
 
-An implementation of higher order function [**fold/reduce**](http://en.wikipedia.org/wiki/Fold_(higher-order_function)) in
+An implementation of higher order function [**fold/reduce**]("http://en.wikipedia.org/wiki/Fold_(higher-order_function)") in
 JavaScript to count the number of negative numbers in a list:
 
 * **forEach** created in **higher-order-functions.html** is reused as-is
