@@ -1,0 +1,32 @@
+<html>
+<body>
+<script>
+  (function () {
+    var forEach = function (list, action) {
+      for (var i = 0; i < list.length; i++) {
+        action(list[i]);
+      }
+    };
+
+    var reduce = function (combine, base, list) {
+      forEach(list, function (item) {
+        base = combine(base, item);
+      });
+      return base;
+    };
+
+    var countNegativeNumbers = function (negativeNumbersTillNow, currentNumber) {
+      if (typeof currentNumber === "number" && currentNumber < 0) {
+        negativeNumbersTillNow += 1;
+      }
+      return negativeNumbersTillNow;
+    };
+
+    var initialCount = 0;
+
+    console.log(reduce(countNegativeNumbers, initialCount, [1, -1, 0, 45, "-42", -42]));
+
+  })();
+</script>
+</body>
+</html>
