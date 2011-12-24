@@ -1,6 +1,3 @@
-About
-===
-
 This is a collection of examples of functional programming implemented in JavaScript.
 
 higher-order-functions.html
