@@ -1,0 +1,56 @@
+<html>
+<body>
+<script>
+  (function () {
+
+    function justAFunction() {
+      console.log("functions can be declared");
+    }
+
+    var justAnotherFunction = function () {
+      console.log("functions can be expressed as objects");
+    };
+
+    console.log("All functions are objects of type 'function'");
+    console.log(typeof justAFunction);
+    console.log(typeof justAnotherFunction);
+    console.log(typeof justAFunctionThatWillBeHoisted); // This function is available through hoisting
+                                                        // although it will be declared later
+
+    function justAFunctionThatWillBeHoisted() {
+      console.log("Function declarations are automatically hoisted to the top");
+    }
+
+    var logArguments = function () {
+      console.log(arguments);
+    };
+
+    console.log("All functions can have dynamic arguments");
+    logArguments("hello", "world");
+    logArguments("hello", "world", 42, ["huh", "wtf!"], {hello:"world"});
+
+    var logThis = function () {
+      console.log(this);
+    };
+
+    console.log("All functions can have dynamic contexts / 'this' objects");
+    logThis();
+    logThis.apply({yo:"baby!"});
+
+    (function (name) {
+      console.log(name + " functions can be auto-executed on definition")
+    })("Anonymous");
+
+    console.log("JavaScript provides functional scoping instead of block scoping");
+    (function () {
+      if (true) {
+        var x = true;
+        console.log("Is 'x' available inside the block? " + x);
+      }
+      console.log("Is 'x' available outside the block? " + x);
+    })();
+
+  })();
+</script>
+</body>
+</html>

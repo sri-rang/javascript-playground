@@ -1,5 +1,22 @@
 This is a collection of examples of functional programming implemented in JavaScript.
 
+functions-in-javascript.html
+---
+
+Quick examples to grasp the basics of functions in JavaScript
+
+* Functions can be declared, functions can be expressed
+* Functions declared are automatically hoisted to the top making them available throughout the code
+    * Function explicitly expressed as objects are not hoisted
+* All functions are objects of type 'function'
+* All functions can have dynamic arguments
+    * **arguments** array is available within a function
+* All functions can have dynamic contexts
+    * **this** object is available withing a function
+    * **this** usually defaults to the DOM Window object
+* Anonymous functions can be auto-executed on definition
+* JavaScript provides functional scoping instead of block scoping
+
 higher-order-functions.html
 ---
 
