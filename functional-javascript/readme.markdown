@@ -48,7 +48,7 @@ appropriate area function.
 closure-2.html
 ---
 
-In this example, we create a class **Shape** and show how private members can be implemented with a closure.
+In this example, we create a class **Shape** and show how private members can be implemented with closures.
 
-* **Shape** contains a private method **area** generated reusing the closure function **getAreaFunction** in **closure-1.html**
+* **Shape** contains a private method **area** generated reusing the closure function **getAreaFunction** from **closure-1.html**
 * Each **Shape** instance has a public method **getArea** which returns the rounded off result of private function **area**
