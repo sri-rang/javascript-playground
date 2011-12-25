@@ -38,3 +38,9 @@ An implementation of the Map function as a higher order function **map** to doub
 * **map** is implemented and it takes in two parameters:
     * **mappingFunction** is the function to apply on each item of the list
     * **list** is any list / array that is to be mapped
+
+closure-1.html
+---
+
+A simple example of a closure implementation **getAreaFunction** which reads the **shape** argument and returns an
+appropriate area function.
