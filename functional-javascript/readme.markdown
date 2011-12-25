@@ -52,3 +52,11 @@ In this example, we create a class **Shape** and show how private members can be
 
 * **Shape** contains a private method **area** generated reusing the closure function **getAreaFunction** from **closure-1.html**
 * Each **Shape** instance has a public method **getArea** which returns the rounded off result of private function **area**
+
+closure-3.html
+---
+
+This is a textbook example of how closures are used when event handlers are assigned in loops.
+
+* Red boxes are assigned click handlers without a closure, the value of **redBoxId** for all red boxes in the last value of the loop
+* Green boxes are assigned click handlers with closures, their click handlers have the correct values

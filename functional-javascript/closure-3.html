@@ -1,0 +1,48 @@
+<html>
+<head>
+  <style>
+    .redBox {
+      margin: 3px;
+      width: 24px;
+      height: 24px;
+      background: red;
+    }
+
+    .greenBox {
+      margin: 3px;
+      width: 24px;
+      height: 24px;
+      background: green;
+    }
+  </style>
+</head>
+<body>
+
+<div id="redBox1" class="redBox"></div>
+<div id="redBox2" class="redBox"></div>
+<div id="redBox3" class="redBox"></div>
+
+<div id="greenBox1" class="greenBox"></div>
+<div id="greenBox2" class="greenBox"></div>
+<div id="greenBox3" class="greenBox"></div>
+
+<script type="text/javascript">
+  (function () {
+    for (var i = 1; i <= 3; i++) {
+
+      var redBoxId = "redBox" + i;
+      document.getElementById(redBoxId).onclick = function () {
+        console.log(redBoxId + " was clicked");
+      };
+
+      var greenBoxId = "greenBox" + i;
+      document.getElementById(greenBoxId).onclick = (function (greenBoxId) {
+        return function () {
+          console.log(greenBoxId + " was clicked");
+        }
+      })(greenBoxId);
+    }
+  })();
+</script>
+</body>
+</html>
