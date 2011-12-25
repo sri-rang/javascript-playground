@@ -1,0 +1,46 @@
+<html>
+<body>
+<script type="text/javascript">
+  (function () {
+
+    const CIRCLE = "circle";
+    const SQUARE = "square";
+    const RECTANGLE = "rectangle";
+
+    var getAreaFunction = function (shape) {
+      if (shape === CIRCLE) {
+        return function (radius) {
+          return Math.PI * radius * radius;
+        };
+      } else if (shape === SQUARE) {
+        return function (side) {
+          return side * side;
+        };
+      } else if (shape === RECTANGLE) {
+        return function (length, breadth) {
+          return length * breadth;
+        };
+      }
+    };
+
+    var Shape = function (type) {
+      var area = getAreaFunction(type);
+      return {
+        getArea: function() {
+          return Math.round(Number(area.apply(this, arguments)));
+        }
+      };
+    };
+
+    var aCircle = new Shape(CIRCLE);
+    var aSquare = new Shape(SQUARE);
+    var aRectangle = new Shape(RECTANGLE);
+
+    console.log(aCircle.getArea(50));
+    console.log(aSquare.getArea(50));
+    console.log(aRectangle.getArea(50, 20));
+
+  })();
+</script>
+</body>
+</html>

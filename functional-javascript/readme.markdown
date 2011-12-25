@@ -44,3 +44,11 @@ closure-1.html
 
 A simple example of a closure implementation **getAreaFunction** which reads the **shape** argument and returns an
 appropriate area function.
+
+closure-2.html
+---
+
+In this example, we create a class **Shape** and show how private members can be implemented with a closure.
+
+* **Shape** contains a private method **area** generated reusing the closure function **getAreaFunction** in **closure-1.html**
+* Each **Shape** instance has a public method **getArea** which returns the rounded off result of private function **area**
