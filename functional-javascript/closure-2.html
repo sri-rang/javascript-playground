@@ -8,25 +8,25 @@
     const RECTANGLE = "rectangle";
 
     var getAreaFunction = function (shape) {
-      if (shape === CIRCLE) {
-        return function (radius) {
-          return Math.PI * radius * radius;
-        };
-      } else if (shape === SQUARE) {
-        return function (side) {
-          return side * side;
-        };
-      } else if (shape === RECTANGLE) {
-        return function (length, breadth) {
-          return length * breadth;
-        };
-      }
+      return function () {
+        switch (shape) {
+          case CIRCLE:
+            return Math.PI * arguments[0] * arguments[0];
+            break;
+          case SQUARE:
+            return arguments[0] * arguments[0];
+            break;
+          case RECTANGLE:
+            return arguments[0] * arguments[1];
+            break;
+        }
+      };
     };
 
     var Shape = function (type) {
       var area = getAreaFunction(type);
       return {
-        getArea: function() {
+        getArea:function () {
           return Math.round(Number(area.apply(this, arguments)));
         }
       };
