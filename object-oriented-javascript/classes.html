@@ -1,0 +1,56 @@
+<html>
+<body>
+<script>
+  (function () {
+
+    var someObject = new function () {
+      this.sayHi = function () {
+        console.log("I say 'hi'");
+      };
+    };
+
+    someObject.sayHi();
+
+    var anotherObject = new someObject.sayHi();
+
+    console.log(anotherObject);
+
+    var Vehicle = function () {
+      console.log("I am called when vehicle is instantiated");
+      this.isMoving = false;
+    };
+
+    var v1 = new Vehicle();
+    console.log(v1.isMoving);
+
+    Vehicle.prototype.move = function () {
+      console.log("Vehicle will move");
+      this.isMoving = true;
+    };
+
+    v1.move();
+    console.log(v1.isMoving);
+
+    Vehicle.ERRORS = [];
+    Vehicle.ERRORS.push("Hmm.. wtf!");
+
+    console.log(Vehicle.ERRORS);
+
+    var Car = function () {
+      Vehicle.call(this);
+    };
+
+    Car.prototype = new Vehicle();
+
+    var c1 = new Car();
+    console.log(c1.isMoving);
+    c1.move();
+    console.log(c1.isMoving);
+
+    console.log(c1 instanceof Car);
+    console.log(c1 instanceof Vehicle);
+
+  })();
+</script>
+</body>
+</html>
