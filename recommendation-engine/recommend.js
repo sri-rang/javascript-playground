@@ -11,6 +11,7 @@ var user = source.user;
 var sortDescending = function (a, b) {
   return a.userSpecificScore < b.userSpecificScore;
 };
+
 var summation = function (list) {
   var result = 0;
   list.forEach(function (item) {
@@ -18,25 +19,34 @@ var summation = function (list) {
   });
   return result;
 };
+
 var getHairProfileSimilarityFactor = function (hairProfile1, hairProfile2) {
   var result = 0;
-  if (hairProfile1.sex === hairProfile2.sex)              result += configuration.weights.sex;
-  if (hairProfile1.ageGroup === hairProfile2.ageGroup)    result += configuration.weights.ageGroup;
-  if (hairProfile1.ethnicity === hairProfile2.ethnicity)  result += configuration.weights.ethnicity;
-  if (hairProfile1.style === hairProfile2.style)          result += configuration.weights.style;
+  if (hairProfile1.sex === hairProfile2.sex)              result += configuration.hairProfileAttributeWeights.sex;
+  if (hairProfile1.ageGroup === hairProfile2.ageGroup)    result += configuration.hairProfileAttributeWeights.ageGroup;
+  if (hairProfile1.ethnicity === hairProfile2.ethnicity)  result += configuration.hairProfileAttributeWeights.ethnicity;
+  if (hairProfile1.style === hairProfile2.style)          result += configuration.hairProfileAttributeWeights.style;
   return result;
 };
+
 var getUserSpecificScores = function (rating) {
   var hairProfileSimilarityFactor = getHairProfileSimilarityFactor(user.hairProfile, rating.hairProfile);
-  return rating.score * hairProfileSimilarityFactor;
+  var recencyFactor = _.filter(configuration.recencyFactorRanges, function (range) {
+    return rating.daysSinceRating >= range.min && rating.daysSinceRating <= range.max;
+  })[0].factor;
+  return rating.score * hairProfileSimilarityFactor * recencyFactor;
 };
 
 var getRecommendedStylists = function () {
   stylists.forEach(function (stylist) {
+    if (stylist.ratings.length < configuration.minimumNumberOfRatings) return;
     var userSpecificRatings = _.map(stylist.ratings, getUserSpecificScores);
     stylist.userSpecificScore = summation(userSpecificRatings);
   });
-  return stylists.sort(sortDescending);
+  return _.filter(stylists,
+    function (stylist) {
+      return stylist.userSpecificScore != undefined;
+    }).sort(sortDescending);
 };
 
 getRecommendedStylists().forEach(function (stylist) {
