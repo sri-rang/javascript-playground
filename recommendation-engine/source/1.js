@@ -1,8 +1,13 @@
 // This depicts how weight-ages of hairProfile attributes influence recommendations
 
+exports.user = {
+  name: "Sri",
+  hairProfile: { sex: "male", ageGroup: "25-30", ethnicity: "indian", style: "short"}
+};
+
 exports.stylists = [
   {
-    name: "ExactMatch-HighRating",
+    name: "1",
     ratings: [
       {
         hairProfile: { sex: "male", ageGroup: "25-30", ethnicity: "indian", style: "short"},
@@ -11,7 +16,7 @@ exports.stylists = [
     ]
   },
   {
-    name: "ExactMatch-AverageRating",
+    name: "2",
     ratings: [
       {
         hairProfile: { sex: "male", ageGroup: "25-30", ethnicity: "indian", style: "short"},
@@ -20,7 +25,7 @@ exports.stylists = [
     ]
   },
   {
-    name: "CloseMatch-HighRating",
+    name: "3",
     ratings: [
       {
         hairProfile: { sex: "male", ageGroup: "25-30", ethnicity: "indian", style: "long"},
@@ -29,8 +34,12 @@ exports.stylists = [
     ]
   },
   {
-    name: "AverageMatch-HighRating",
+    name: "4",
     ratings: [
+      {
+        hairProfile: { sex: "female", ageGroup: "25-30", ethnicity: "indian", style: "long"},
+        score: 5
+      },
       {
         hairProfile: { sex: "female", ageGroup: "25-30", ethnicity: "indian", style: "long"},
         score: 5

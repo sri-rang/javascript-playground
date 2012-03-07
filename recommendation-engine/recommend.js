@@ -5,12 +5,7 @@ var _ = require("./underscore");
 var source = require("./source/1.js");
 var stylists = source.stylists;
 var configuration = source.configuration;
-
-// User
-var user = {
-  name: "Sri",
-  hairProfile: { sex: "male", ageGroup: "25-30", ethnicity: "indian", style: "short"}
-};
+var user = source.user;
 
 // Helpers
 var sortDescending = function (a, b) {
@@ -31,17 +26,16 @@ var getHairProfileSimilarityFactor = function (hairProfile1, hairProfile2) {
   if (hairProfile1.style === hairProfile2.style)          result += configuration.weights.style;
   return result;
 };
-var getUserSpecificRatings = function (rating) {
+var getUserSpecificScores = function (rating) {
   var hairProfileSimilarityFactor = getHairProfileSimilarityFactor(user.hairProfile, rating.hairProfile);
   return rating.score * hairProfileSimilarityFactor;
 };
 
 var getRecommendedStylists = function () {
   stylists.forEach(function (stylist) {
-    var userSpecificRatings = _.map(stylist.ratings, getUserSpecificRatings);
+    var userSpecificRatings = _.map(stylist.ratings, getUserSpecificScores);
     stylist.userSpecificScore = summation(userSpecificRatings);
   });
-
   return stylists.sort(sortDescending);
 };
 
