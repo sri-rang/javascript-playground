@@ -10,6 +10,6 @@
     "vows": ">= 0.0.1"
   },
   "scripts": {
-    "test": "vows --spec tests/*"
+    "test": "vows --spec test/*"
   }
 }

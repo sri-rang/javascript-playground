@@ -1,50 +1,55 @@
-exports = {
-  add: function (bill, callback) {
+var model = require("./model.js");
 
+module.exports = {
+  add: function (bill, callback) {
+    model.bill.add(bill, callback);
   },
   modify: function (bill, callback) {
-
+    model.bill.modify(bill, callback);
   },
-  remove: function (id, callback) {
-
+  remove: function (billId, callback) {
+    model.bill.remove(billId, callback);
+  },
+  removeAll: function (callback) {
+    model.bill.removeAll(callback);
   },
   list: function (callback) {
-
+    model.bill.list(callback);
   },
-  get: function (id, callback) {
-
-  }
-};
-
-exports.tags = {
-  add: function (billId, tag, callback) {
-
+  get: function (billId, callback) {
+    model.bill.get(billId, callback);
   },
-  remove: function (billId, tag, callback) {
 
-  }
-};
+  tags: {
+    add: function (billId, tag, callback) {
 
-exports.documents = {
-  add: function (billId, documentId, callback) {
+    },
+    remove: function (billId, tag, callback) {
 
+    }
   },
-  remove: function (billId, documentId, callback) {
 
-  }
-};
+  documents: {
+    add: function (billId, documentId, callback) {
 
-exports.comments = {
-  add: function (billId, comment, callback) {
+    },
+    remove: function (billId, documentId, callback) {
+
+    }
   },
-  edit: function (comment, callback) {
-  },
-  remove: function (commentId, callback) {
-  },
-  removeAll: function (billId, callback) {
-  },
-  list: function (billId, callback) {
-  },
-  get: function (commentId, callback) {
+
+  comments: {
+    add: function (billId, comment, callback) {
+    },
+    edit: function (comment, callback) {
+    },
+    remove: function (commentId, callback) {
+    },
+    removeAll: function (billId, callback) {
+    },
+    list: function (billId, callback) {
+    },
+    get: function (commentId, callback) {
+    }
   }
 }
