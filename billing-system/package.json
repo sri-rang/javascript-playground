@@ -1,0 +1,15 @@
+{
+  "name": "billing-system",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./lib/index.js",
+  "dependencies": {
+    "mongojs": ">= 0.0.1"
+  },
+  "devDependencies": {
+    "vows": ">= 0.0.1"
+  },
+  "scripts": {
+    "test": "vows --spec tests/*"
+  }
+}
