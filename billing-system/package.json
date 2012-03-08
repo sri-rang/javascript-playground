@@ -2,7 +2,7 @@
   "name": "billing-system",
   "version": "1.0.0",
   "private": true,
-  "main": "./lib/index.js",
+  "main": "./lib/service.js",
   "dependencies": {
     "mongojs": ">= 0.0.1"
   },
