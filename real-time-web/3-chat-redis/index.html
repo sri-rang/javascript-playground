@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+
+<form id="form"><input id="input" type="text" autofocus="true" placeholder="say it!"></form>
+
+<ul id="chat"></ul>
+
+<script>
+  var getElementById = document.getElementById.bind(document);
+
+  var log = function (type, message) {
+    var li = document.createElement("li");
+    li.className = type;
+    li.textContent = message;
+    getElementById("chat").appendChild(li);
+  };
+
+  var ws = new WebSocket("ws://localhost:8080" + location.pathname);
+  ws.onopen = function () {
+    log("system", "connected to chat room " + location.pathname)
+  };
+  ws.onmessage = function (e) {
+    var data = JSON.parse(e.data);
+    if (typeof data === "string") {
+      log("you", data);
+    } else {
+      data.forEach(function (message) {
+        log("you", message);
+      });
+    }
+  };
+
+  getElementById("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var input = getElementById("input");
+    var message = input.value;
+    if (message) {
+      ws.send(message);
+      input.value = "";
+    }
+  });
+</script>
+
+</body>
+</html>
