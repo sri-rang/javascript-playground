@@ -1,0 +1,8 @@
+{
+  "name": "5-chat-webrtc",
+  "version": "0.0.1",
+  "dependencies": {
+    "websocket": "",
+    "redis": ""
+  }
+}

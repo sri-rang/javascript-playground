@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <title>Chat WebRTC</title>
+  <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+
+<div id="talk">
+  <button id="button_start" disabled="true">start</button>
+  <video id="video_remote" autoplay="autoplay" hidden="true"></video>
+  <video id="video_local" autoplay="autoplay" hidden="true"></video>
+</div>
+
+<script>
+  // env
+  var getElementById = document.getElementById.bind(document);
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+  window.RTCPeerConnection = window.RTCPeerConnection || window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+
+  // dom
+  var button_start = getElementById("button_start"),
+      video_local = getElementById("video_local"),
+      video_remote = getElementById("video_remote");
+
+  var ws = new WebSocket("ws://localhost:8080" + location.pathname), pc;
+
+  ws.onmessage = function (e) {
+    if (!pc) return;
+    var message = JSON.parse(e.data);
+    if (message.sdp) {
+      pc.setRemoteDescription(new RTCSessionDescription(message.sdp), function () {
+        if (pc.remoteDescription.type == "offer") {
+          if (window.confirm("answer call?")) {
+            pc.createAnswer(local_description_created, log_error);
+            console.log(3, "call answered");
+          }
+        }
+      }, log_error);
+    }
+    else if (message.candidate) {
+      pc.addIceCandidate(new RTCIceCandidate(message.candidate));
+    }
+  };
+
+  navigator.getUserMedia({audio: false, video: true}, function (stream) {
+    pc = new RTCPeerConnection({iceServers: [
+      {url: "stun:stun.l.google.com:19302"}
+    ]});
+
+    pc.onicecandidate = function (e) {
+      if (e.candidate) ws.send(JSON.stringify({candidate: e.candidate}));
+    };
+
+    pc.onaddstream = function (e) {
+      console.log(4, "remote stream added");
+      video_remote.src = URL.createObjectURL(e.stream);
+      video_remote.hidden = false;
+      button_start.hidden = true;
+    };
+
+    video_local.src = URL.createObjectURL(stream);
+    video_local.hidden = false;
+    pc.addStream(stream);
+    console.log(1, "local stream added");
+
+    setTimeout(function () {
+      button_start.disabled = false;
+    }, 5000);
+  });
+
+  button_start.onclick = function () {
+    pc.createOffer(local_description_created, log_error);
+    console.log(2, "calling");
+  };
+
+  function log_error(error) {
+  }
+
+  function local_description_created(description) {
+    pc.setLocalDescription(description, function () {
+      ws.send(JSON.stringify({sdp: pc.localDescription}));
+    }, log_error);
+  }
+
+</script>
+
+</body>
+</html>
