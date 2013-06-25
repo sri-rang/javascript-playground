@@ -17,6 +17,7 @@
     li.className = type;
     li.textContent = message;
     getElementById("chat").appendChild(li);
+    return true;
   };
 
   var ws = new WebSocket("ws://localhost:8080");
@@ -26,7 +27,7 @@
   getElementById("form").addEventListener("submit", function (e) {
     e.preventDefault();
     var input = getElementById("input");
-    input.value && ws.send(input.value);
+    input.value && log("you", input.value) && ws.send(input.value);
     input.value = "";
   });
 </script>
