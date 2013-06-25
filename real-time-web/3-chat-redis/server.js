@@ -19,13 +19,9 @@
 
   ws_server.on("request", function (req) {
     var conn = req.accept(), channel = "channel-" + req.resource, list = "messages-" + req.resource;
-    store.redis.lrange(list, 0, -1, function (err, messages) {
-      conn.sendUTF(JSON.stringify(messages));
-    });
+    store.redis.lrange(list, 0, -1, function (err, messages) { conn.sendUTF(JSON.stringify(messages)); });
     store.subscriber.subscribe(channel);
-    store.subscriber.on("message", function (channel, message) {
-      conn.sendUTF(JSON.stringify(message));
-    });
+    store.subscriber.on("message", function (target_channel, message) { if (target_channel === channel) conn.sendUTF(JSON.stringify(message)); });
     conn.on("message", function (message) {
       store.redis.rpush(list, message.utf8Data);
       store.redis.publish(channel, message.utf8Data);
