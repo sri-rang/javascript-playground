@@ -21,14 +21,10 @@
     store.connections[room] = store.connections[room] || [];
     store.connections[room].push(conn);
     store.messages[room] = store.messages[room] || [];
-    store.messages[room].forEach(function (message) {
-      conn.sendUTF(message.utf8Data);
-    });
+    store.messages[room].forEach(function (message) { conn.sendUTF(message.utf8Data); });
     conn.on("message", function (message) {
       store.messages[room].push(message);
-      store.connections[room].forEach(function (conn) {
-        conn.sendUTF(message.utf8Data);
-      });
+      store.connections[room].forEach(function (conn) { conn.sendUTF(message.utf8Data); });
     });
   });
 
