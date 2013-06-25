@@ -20,22 +20,14 @@
   };
 
   var ws = new WebSocket("ws://localhost:8080");
-  ws.onopen = function () {
-    log("system", "connected to echo app")
-  };
-  ws.onmessage = function (e) {
-    log("echo", e.data);
-  };
+  ws.onopen = function () { log("system", "connected to echo app") };
+  ws.onmessage = function (e) { log("echo", e.data); };
 
   getElementById("form").addEventListener("submit", function (e) {
     e.preventDefault();
     var input = getElementById("input");
-    var message = input.value;
-    if (message) {
-      ws.send(message);
-      log("you", message);
-      input.value = "";
-    }
+    input.value && ws.send(input.value);
+    input.value = "";
   });
 </script>
 
